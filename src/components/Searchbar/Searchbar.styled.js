@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Searchbar = styled.div`
+export const Searchbar = styled.header`
   top: 0;
   left: 0;
   position: sticky;
@@ -29,12 +29,12 @@ export const SearchForm = styled.form`
   overflow: hidden;
 `;
 
-export const SearchForm_button = styled.button`
+export const SearchFormButton = styled.button`
   display: inline-block;
   width: 48px;
   height: 48px;
   border: 0;
-  background-image: url('https://image.flaticon.com/icons/svg/149/149852.svg');
+  background-image: url('http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd');
   background-size: 40%;
   background-repeat: no-repeat;
   background-position: center;
@@ -47,19 +47,7 @@ export const SearchForm_button = styled.button`
   }
 `;
 
-export const SearchForm_button_label = styled.div`
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  clip-path: inset(50%);
-  border: 0;
-`;
-
-export const SearchForm_input = styled.input`
+export const SearchFormInput = styled.input`
   display: inline-block;
   width: 100%;
   font: inherit;

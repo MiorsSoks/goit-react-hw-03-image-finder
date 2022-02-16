@@ -1,15 +1,28 @@
-import styled from 'styled-components';
+import { Component } from 'react';
+import axios from 'axios';
+import { ImageGalleryList } from './ImageGallery.styled';
+const PIXABAY_KEY = '24537625-47620fa03ad46ed0668a7b060';
 
-export const ImageGallery = styled.div`
-  display: grid;
-  max-width: calc(100vw - 48px);
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  grid-gap: 16px;
-  margin-top: 0;
-  margin-bottom: 0;
-  padding: 0;
-  list-style: none;
-  margin-left: auto;
-  margin-right: auto;
-`;
+class ImageGallery extends Component {
+  componentDidUpdate(prevProps, prevState) {
+    const prewName = prevProps.value;
+    const newName = this.props.value
+    if (prewName !== newName) {
 
+      axios
+        .get(
+          `https://pixabay.com/api/?q=${newName}&page=1&key=${PIXABAY_KEY}&image_type=photo&orientation=horizontal&per_page=12`
+        )
+        .catch(error => console.log('Error', error.message))
+        .then(function (response) {
+          console.log(response.data);
+        });
+    }
+  }
+
+  render() {
+    return <ImageGalleryList></ImageGalleryList>;
+  }
+}
+
+export default ImageGallery;
