@@ -6,7 +6,6 @@ import {
   Searchbar,
   SearchForm,
   SearchFormButton,
-  SearchFormButtonLabel,
   SearchFormInput,
 } from './Searchbar.styled';
 

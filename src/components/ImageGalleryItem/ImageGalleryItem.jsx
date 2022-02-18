@@ -1,11 +1,11 @@
-import {GalleryItem, ImageGallery} from './ImageGalleryItem.styled'
+import { GalleryItem, ImageGallery } from './ImageGalleryItem.styled';
 
-const ImageGalleryItem = () => {
+const ImageGalleryItem = ({ small, name }) => {
   return (
-    <GalleryItem class="gallery-item">
-      <ImageGallery src="" alt="" />
+    <GalleryItem>
+      <ImageGallery src={small} alt={name} />
     </GalleryItem>
   );
 };
 
-export default ImageGalleryItem
+export default ImageGalleryItem;
