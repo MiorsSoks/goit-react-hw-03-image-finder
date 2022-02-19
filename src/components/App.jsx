@@ -4,15 +4,18 @@ import SearchBar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
 import Loader from './Loader/Loader';
+import Modal from './Modal';
 
 const PIXABAY_KEY = '24537625-47620fa03ad46ed0668a7b060';
 
 class App extends Component {
   state = {
     value: '',
-    images: '',
+    images: [],
     page: 1,
     stateMashine: 'idle',
+    showModal: false,
+    largeImage: '',
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -33,33 +36,42 @@ class App extends Component {
           this.setState(prewState => ({
             images: [...prewState.images, ...images],
           }));
-          console.log(images);
         })
         .finally(() => this.setState({ stateMashine: 'loaded' }));
     }
   }
+
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({ showModal: !showModal }));
+  };
 
   addPage = page => {
     this.setState({ page: this.state.page + 1 });
   };
 
   addToState = value => {
-    this.setState({ value: value, page: 1, images: '' });
+    this.setState({ value: value, page: 1, images: [] });
+  };
+
+  addLargeImg = e => {
+    this.setState({ largeImage: e.target.getAttribute('id') });
+    this.toggleModal();
   };
 
   render() {
-    const { addToState, addPage } = this;
-    const { images, stateMashine } = this.state;
+    const { addToState, addPage, toggleModal, addLargeImg } = this;
+    const { images, stateMashine, showModal, largeImage } = this.state;
     return (
       <div className="App">
         <SearchBar onSubmit={value => addToState(value)} />
         {images.length === 0 && stateMashine === 'loaded' ? (
-          <p className='error'>not found</p>
+          <p className="error">not found</p>
         ) : (
-          <ImageGallery images={images} />
+          <ImageGallery images={images} onClick={addLargeImg} />
         )}
         {stateMashine === 'loading' && <Loader></Loader>}
         {images.length > 0 && <Button onClick={addPage} />}
+        {showModal && <Modal onClose={toggleModal} largeImage={largeImage} />}
       </div>
     );
   }

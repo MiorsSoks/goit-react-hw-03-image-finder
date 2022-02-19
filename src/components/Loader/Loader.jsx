@@ -1,6 +1,6 @@
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import { Oval } from 'react-loader-spinner';
-import {Container} from './Loader.styled'
+import { Container } from './Loader.styled';
 
 export default function Loader() {
   return (

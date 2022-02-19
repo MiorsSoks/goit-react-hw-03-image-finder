@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { GrSearch } from 'react-icons/gr'
+import { GrSearch } from 'react-icons/gr';
 
 import {
   Searchbar,
@@ -10,8 +10,8 @@ import {
 } from './Searchbar.styled';
 
 class SearchBar extends Component {
- state = {
-    value: "",
+  state = {
+    value: '',
   };
 
   // Отвечает за обновление состояния
@@ -23,7 +23,7 @@ class SearchBar extends Component {
   handleSubmit = evt => {
     evt.preventDefault();
     if (this.state.value.trim() === '') {
-      alert('Введите данные для поиска')
+      alert('Введите данные для поиска');
       return;
     }
     // Проп который передается форме для вызова при сабмите
@@ -33,28 +33,27 @@ class SearchBar extends Component {
   render() {
     const { value } = this.state;
     return (
-    <Searchbar>
-      <SearchForm onSubmit={this.handleSubmit}>
-        <SearchFormButton type="submit">
+      <Searchbar>
+        <SearchForm onSubmit={this.handleSubmit}>
+          <SearchFormButton type="submit">
             <GrSearch />
-        </SearchFormButton>
-        <SearchFormInput
-          type="text"
-          autocomplete="off"
-          autoFocus
-          placeholder="Search images and photos"
-          value={value}
-          onChange={this.handleChange}
-        />
-      </SearchForm>
-    </Searchbar>
-    )
-
+          </SearchFormButton>
+          <SearchFormInput
+            type="text"
+            autocomplete="off"
+            autoFocus
+            placeholder="Search images and photos"
+            value={value}
+            onChange={this.handleChange}
+          />
+        </SearchForm>
+      </Searchbar>
+    );
   }
 }
 
 export default SearchBar;
 
 SearchBar.propTypes = {
-  onSubmit: PropTypes.func,
+  onSubmit: PropTypes.func.isRequired,
 };
