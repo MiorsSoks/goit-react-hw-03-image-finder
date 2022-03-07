@@ -16,6 +16,7 @@ class App extends Component {
     stateMashine: 'idle',
     showModal: false,
     largeImage: '',
+    totalPages: '',
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -35,6 +36,9 @@ class App extends Component {
           const images = responce.data.hits;
           this.setState(prewState => ({
             images: [...prewState.images, ...images],
+          }));
+          this.setState(prewState => ({
+            totalPages: responce.data.totalHits / 12,
           }));
         })
         .finally(() => this.setState({ stateMashine: 'loaded' }));
@@ -60,7 +64,8 @@ class App extends Component {
 
   render() {
     const { addToState, addPage, toggleModal, addLargeImg } = this;
-    const { images, stateMashine, showModal, largeImage } = this.state;
+    const { images, stateMashine, showModal, largeImage, totalPages, page } =
+      this.state;
     return (
       <div className="App">
         <SearchBar onSubmit={value => addToState(value)} />
@@ -70,7 +75,9 @@ class App extends Component {
           <ImageGallery images={images} onClick={addLargeImg} />
         )}
         {stateMashine === 'loading' && <Loader></Loader>}
-        {images.length > 0 && <Button onClick={addPage} />}
+        {images.length > 0 && page <= totalPages && (
+          <Button onClick={addPage} />
+        )}
         {showModal && <Modal onClose={toggleModal} largeImage={largeImage} />}
       </div>
     );
